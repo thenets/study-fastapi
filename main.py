@@ -15,6 +15,7 @@ class Item(BaseModel):
     tax: Optional[float] = None
     tags: List[str] = []
 
+
 # Basic static path
 @app.get("/")
 async def root():
@@ -77,6 +78,7 @@ async def delete_item(item_id: int):
         )
 
     return item_id
+
 
 # UPDATE item
 @app.put("/items/{item_id}", response_model=Item)
