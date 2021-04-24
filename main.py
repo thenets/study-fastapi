@@ -56,3 +56,24 @@ async def create_item(item: Item):
     return item
 
 
+# DELETE item
+# also better docummentation and response codes
+@app.delete(
+    "/items/{item_id}",
+    summary="Delete an awesome item",
+    response_class=Response,
+    responses={
+        200: {"description": "Item successfully deleted"},
+        404: {"description": "Item not found"},
+    },
+)
+async def delete_item(item_id: int):
+    if item_id == 69:
+        raise HTTPException(
+            status_code=404,
+            detail="Item not found. Already of stock for obvious reasons.",
+            headers={"X-Error": "Already of stock for obvious reasons."},
+        )
+
+    return item_id
+
