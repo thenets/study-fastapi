@@ -32,3 +32,11 @@ async def read_item(item_id, config_id):
 async def read_item(skip: int = 0, limit: int = 10):
     return fake_items_db[skip : skip + limit]
 
+
+# Headers parameters
+@app.get("/foods/")
+async def read_foods(
+    user_agent: Optional[str] = Header(None),
+    my_token: Optional[str] = Header(None),
+):
+    return {"User-Agent": user_agent, "My-Token": my_token}
