@@ -24,7 +24,7 @@ async def root():
 
 # Path parameters
 @app.get("/items/{item_id}")
-async def read_item(item_id):
+async def read_item(item_id: int):
     return {"item_id": item_id, "times_two": str(int(item_id) * 2)}
 
 
@@ -73,8 +73,8 @@ async def delete_item(item_id: int):
     if item_id == 69:
         raise HTTPException(
             status_code=404,
-            detail="Item not found. Already of stock for obvious reasons.",
-            headers={"X-Error": "Already of stock for obvious reasons."},
+            detail="Item not found. Already out of stock for obvious reasons.",
+            headers={"X-Error": "Already out of stock for obvious reasons."},
         )
 
     return item_id
