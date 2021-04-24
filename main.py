@@ -40,3 +40,19 @@ async def read_foods(
     my_token: Optional[str] = Header(None),
 ):
     return {"User-Agent": user_agent, "My-Token": my_token}
+
+
+# CREATE item
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+    tags: List[str] = []
+
+
+@app.post("/items/", response_model=Item)
+async def create_item(item: Item):
+    return item
+
+
