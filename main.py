@@ -1,10 +1,19 @@
-from fastapi import FastAPI, Header
-from typing import Optional
+from fastapi import FastAPI, Header, Response, HTTPException
+from typing import List, Optional
+from pydantic import BaseModel
 
 app = FastAPI()
 
 # Fake database
 fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
+
+# Data model
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+    tags: List[str] = []
 
 # Basic static path
 @app.get("/")
@@ -43,14 +52,6 @@ async def read_foods(
 
 
 # CREATE item
-class Item(BaseModel):
-    name: str
-    description: Optional[str] = None
-    price: float
-    tax: Optional[float] = None
-    tags: List[str] = []
-
-
 @app.post("/items/", response_model=Item)
 async def create_item(item: Item):
     return item
@@ -77,3 +78,7 @@ async def delete_item(item_id: int):
 
     return item_id
 
+# UPDATE item
+@app.put("/items/{item_id}", response_model=Item)
+async def update_item(item_id: int, item: Item):
+    return item
