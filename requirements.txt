@@ -1,3 +1,10 @@
 fastapi
 uvicorn
 black
+
+# New
+--upgrade pip
+--upgrade setuptools
+pydantic
+sqlalchemy
+psycopg2

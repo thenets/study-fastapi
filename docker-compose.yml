@@ -1,0 +1,38 @@
+version: "3.3"
+services:
+
+  postgres:
+    image: postgres:13.2-alpine
+    container_name: "postgres"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=fastapi
+      - POSTGRES_PASSWORD=fastapi
+      - POSTGRES_DB=fastapi
+    ports:
+      - "5432:5432"
+    networks:
+      - "app"
+      - "database"
+    volumes:
+      - "fastapi_postgres:/var/lib/postgresql/data:rw"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: "pgadmin"
+    restart: unless-stopped
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=zelda@hyrule.com"
+      - "PGADMIN_DEFAULT_PASSWORD=hyrule"
+    ports:
+      - "5000:80"
+    networks:
+      - "database"
+
+# Create app network
+networks:
+  app:
+  database:
+
+volumes:
+  fastapi_postgres:

@@ -19,3 +19,16 @@ services-start:
 
 services-stop:
 	docker stop redis
+
+
+# NEW
+database:
+	docker-compose up -d
+
+install-dependencies: create-virtualenv
+	source venv/bin/activate \
+		&& pip install --upgrade pip \
+		&& pip install -r requirements.txt
+
+create-virtualenv:
+	virtualenv -p python3 venv
