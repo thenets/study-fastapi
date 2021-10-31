@@ -1,6 +1,7 @@
 run:
-	. venv/bin/activate && \
-		uvicorn main:app --reload
+	. venv/bin/activate \
+		&& cd src \
+		&& uvicorn main:app --reload
 
 fmt:
 	. venv/bin/activate && \

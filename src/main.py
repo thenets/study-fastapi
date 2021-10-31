@@ -25,7 +25,7 @@ async def root():
 # Path parameters
 @app.get("/items/{item_id}")
 async def read_item(item_id: int):
-    return {"item_id": item_id, "times_two": str(int(item_id) * 2)}
+    return fake_items_db[item_id]
 
 
 @app.get("/items/{item_id}/configs/{config_id}")
